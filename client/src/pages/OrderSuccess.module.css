@@ -1,0 +1,87 @@
+.successContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 24px;
+  background-color: var(--color-bg-canvas);
+  min-height: 60vh;
+}
+
+.successCard {
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-2xl);
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-high);
+  text-align: center;
+}
+
+.iconCircle {
+  width: 72px;
+  height: 72px;
+  background-color: rgba(28, 58, 47, 0.1);
+  color: var(--color-primary-800);
+  font-size: 2.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-weight: bold;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-primary-900);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 32px;
+}
+
+.infoBlock {
+  background-color: hsl(45, 18%, 97%);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  text-align: left;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.infoRow span:first-child {
+  color: var(--color-text-muted);
+}
+
+.infoRow strong {
+  color: var(--color-primary-900);
+}
+
+.totalValue {
+  color: var(--color-accent-600) !important;
+  font-size: 1.125rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.loadingState, .errorState {
+  text-align: center;
+  padding: 120px 24px;
+  color: var(--color-text-muted);
+}

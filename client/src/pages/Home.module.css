@@ -1,0 +1,520 @@
+.homeContainer {
+  width: 100%;
+}
+
+.sectionPadding {
+  padding: 80px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* 1. HERO SECTION */
+.heroSection {
+  position: relative;
+  height: 620px;
+  background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1600');
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-2xl);
+  margin: 24px;
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(28, 58, 47, 0.72) 0%, rgba(28, 58, 47, 0.2) 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+}
+
+.heroContentLeft {
+  max-width: 580px;
+}
+
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.heroTitleItalic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.heroSubtitle {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.heroCta {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  height: 50px;
+  padding: 0 28px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.heroCta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-high);
+}
+
+/* Hero Right Glass Widget */
+.heroGlassCard {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  width: 220px;
+  color: #ffffff;
+  box-shadow: var(--shadow-high);
+}
+
+.glassCardSub {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.glassCardPercent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2.75rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.glassLeafIcon {
+  width: 32px;
+  height: 32px;
+}
+
+/* 2. BESTSELLING PRODUCTS SECTION */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.sectionPre {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: var(--color-primary-900);
+}
+
+.moreProductsLink {
+  color: var(--color-primary-800);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.productSlider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.productCard {
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-low);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.productCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.cardImageContainer {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  background-color: rgba(28, 58, 47, 0.03);
+}
+
+.cardImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.productCard:hover .cardImageContainer img {
+  transform: scale(1.04);
+}
+
+.cardBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #ffffff;
+  color: var(--color-text-main);
+  font-size: 0.6875rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  box-shadow: var(--shadow-low);
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.colorSwatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  margin-bottom: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  height: 40px;
+  overflow: hidden;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardPrice {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-primary-800);
+}
+
+.cardCartBtn {
+  height: 34px;
+  padding: 0 16px;
+  font-size: 0.8125rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-800);
+}
+
+/* 3. KITCHEN BANNER SECTION */
+.kitchenBanner {
+  height: 480px;
+  background-image: url('https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?q=80&w=1600');
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-2xl);
+  margin: 0 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.kitchenBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(28, 58, 47, 0.45);
+  display: flex;
+  align-items: flex-end;
+  padding: 60px;
+}
+
+.kitchenBannerText {
+  max-width: 680px;
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* 4. ECO BADGES ROW */
+.badgesRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 40px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.badgeCard {
+  background-color: hsl(45, 18%, 97%);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-low);
+}
+
+.badgeIcon {
+  font-size: 2rem;
+}
+
+.badgeCard h4 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-primary-900);
+}
+
+/* 5. EXPLORE CATEGORIES */
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.categoryCard {
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition-smooth);
+}
+
+.categoryCard:hover {
+  transform: translateY(-4px);
+}
+
+.categoryCardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 58, 47, 0) 40%, rgba(28, 58, 47, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  color: #ffffff;
+}
+
+.categoryCardOverlay h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.categoryBtn {
+  background-color: #ffffff;
+  color: var(--color-primary-800);
+  border-radius: var(--radius-pill);
+  height: 36px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+/* 6. GALLERY SLIDER */
+.gallerySlider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.galleryCard {
+  height: 240px;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-low);
+}
+
+.galleryCardText {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-style: italic;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* 7. COMMITMENT STATEMENT */
+.commitmentSection {
+  padding: 80px 24px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.commitmentText {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  color: var(--color-text-main);
+  line-height: 1.5;
+}
+
+.commitmentTag {
+  color: var(--color-accent-600);
+  font-weight: 600;
+}
+
+.commitmentTagGreen {
+  color: var(--color-primary-800);
+  font-weight: 600;
+}
+
+.commitmentItalic {
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* 8. 10% OFF NEWSLETTER */
+.newsletterSection {
+  background-color: var(--color-primary-900);
+  border-radius: var(--radius-2xl);
+  margin: 24px;
+  padding: 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  color: #ffffff;
+}
+
+.newsletterLeft h3 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary-200);
+  margin-bottom: 8px;
+}
+
+.newsletterLeft h2 {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  color: #ffffff;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+
+.newsletterForm {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 8px;
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+
+.newsletterInput {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+
+.newsletterInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletterBtn {
+  background-color: #ffffff;
+  color: var(--color-primary-900);
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.newsletterSub {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.newsletterRightGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.newsletterRightGrid img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* Responsiveness overrides */
+@media (max-width: 1024px) {
+  .heroOverlay {
+    padding: 0 40px;
+  }
+  .heroTitle {
+    font-size: 2.75rem;
+  }
+  .productSlider, .categoryGrid, .gallerySlider {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .newsletterSection {
+    grid-template-columns: 1fr;
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroOverlay {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .heroContentLeft {
+    margin-bottom: 40px;
+  }
+  .heroGlassCard {
+    display: none;
+  }
+  .badgesRow {
+    grid-template-columns: 1fr;
+  }
+}
