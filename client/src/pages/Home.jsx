@@ -33,6 +33,11 @@ export default function Home() {
     }
   };
 
+  const handleImageError = (e) => {
+    e.target.onerror = null;
+    e.target.src = 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600';
+  };
+
   return (
     <div className={styles.homeContainer}>
       {/* 1. HERO SECTION */}
@@ -87,7 +92,11 @@ export default function Home() {
                   {prod.isBestseller && (
                     <span className={styles.cardBadge}>Customer favorite</span>
                   )}
-                  <img src={prod.images?.[0] || 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600'} alt={prod.title} />
+                  <img 
+                    src={prod.images?.[0] || 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600'} 
+                    alt={prod.title} 
+                    onError={handleImageError}
+                  />
                 </div>
                 <div className={styles.cardContent}>
                   <div className={styles.colorSwatches}>

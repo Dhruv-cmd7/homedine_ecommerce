@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider, useCart } from './context/CartContext';
 import Home from './pages/Home';
@@ -21,56 +21,52 @@ const NotFound = () => (
 function Navigation({ onOpenCart }) {
   const { user, logout } = useAuth();
   const { cartCount } = useCart();
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      if (searchQuery.trim()) {
+        navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      } else {
+        navigate('/shop');
+      }
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
-    <header style={{
-      height: '80px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '0 40px',
-      borderBottom: '1px solid rgba(28, 58, 47, 0.08)',
-      backgroundColor: 'rgba(250, 249, 246, 0.8)',
-      backdropFilter: 'blur(12px)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 100
-    }}>
-      <div style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
-        <div style={{
-          fontFamily: 'var(--font-serif)',
-          fontSize: '1.85rem',
-          fontWeight: 'bold',
-          letterSpacing: '-0.02em',
-          fontStyle: 'italic'
-        }}>
-          <Link to="/" style={{ color: 'var(--color-primary-900)', textDecoration: 'none' }}>Homedine</Link>
-        </div>
-        <nav style={{ display: 'flex', gap: '32px' }}>
-          <Link to="/shop" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontSize: '0.9375rem' }}>Shop</Link>
-          <Link to="/shop?isBestseller=true" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontSize: '0.9375rem' }}>Bestsellers</Link>
+    <>
+      <header className="header-container">
+      <div className="header-left">
+        <Link to="/" className="logo-link" onClick={() => setMobileMenuOpen(false)}>Homedine</Link>
+        <nav className="desktop-nav">
+          <Link to="/shop">Shop</Link>
+          <Link to="/shop?isBestseller=true">Bestsellers</Link>
         </nav>
       </div>
 
-      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-        <input
-          type="text"
-          placeholder="Search Product..."
-          style={{
-            height: '38px',
-            width: '200px',
-            padding: '0 16px',
-            borderRadius: '20px',
-            border: '1px solid rgba(28, 58, 47, 0.12)',
-            outline: 'none',
-            fontSize: '0.8125rem'
-          }}
-        />
+      <div className="header-right">
+        <div className="search-input-wrapper">
+          <svg className="search-icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search Product..."
+            className="search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearchKeyDown}
+          />
+        </div>
 
         {user ? (
-          <>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }} className="desktop-nav">
             {user.role === 'admin' && (
-              <Link to="/admin" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontWeight: '500' }}>Admin</Link>
+              <Link to="/admin" style={{ fontWeight: '500' }}>Admin</Link>
             )}
             <span style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
               Hi, {user.firstName}
@@ -88,15 +84,13 @@ function Navigation({ onOpenCart }) {
             >
               Sign Out
             </button>
-          </>
+          </div>
         ) : (
-          <Link to="/login" style={{
-            color: 'var(--color-primary-800)',
-            textDecoration: 'none',
-            fontWeight: '500'
-          }}>
-            Sign In
-          </Link>
+          <div className="desktop-nav">
+            <Link to="/login" style={{ fontWeight: '500' }}>
+              Sign In
+            </Link>
+          </div>
         )}
         
         <button
@@ -137,8 +131,71 @@ function Navigation({ onOpenCart }) {
             </span>
           )}
         </button>
+
+        <button
+          className="menu-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          )}
+        </button>
       </div>
     </header>
+
+    <div className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}>
+      <div className="mobile-search-wrapper">
+        <svg className="mobile-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          className="mobile-search-input"
+          placeholder="Search Product..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyDown}
+        />
+      </div>
+      <div className="mobile-nav-links">
+        <Link to="/shop" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
+        <Link to="/shop?isBestseller=true" onClick={() => setMobileMenuOpen(false)}>Bestsellers</Link>
+        {user ? (
+          <>
+            {user.role === 'admin' && (
+              <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>Admin Portal</Link>
+            )}
+            <span style={{ fontSize: '1rem', color: 'var(--color-text-muted)', marginTop: '8px' }}>
+              Signed in as {user.firstName}
+            </span>
+            <a
+              href="#signout"
+              onClick={(e) => {
+                e.preventDefault();
+                logout();
+                setMobileMenuOpen(false);
+              }}
+              style={{ color: 'var(--color-accent-600)' }}
+            >
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <Link to="/login" onClick={() => setMobileMenuOpen(false)}>Sign In</Link>
+        )}
+      </div>
+    </div>
+    </>
   );
 }
 
@@ -163,12 +220,8 @@ function MainRoutes() {
 
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
 
-      <footer style={{
-        backgroundColor: 'var(--color-bg-surface)',
-        borderTop: '1px solid rgba(28, 58, 47, 0.08)',
-        padding: '60px 40px 30px'
-      }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '80px', marginBottom: '60px' }}>
+      <footer className="site-footer">
+        <div className="footer-grid">
           <div>
             <h3 style={{
               fontFamily: 'var(--font-sans)',
@@ -203,13 +256,7 @@ function MainRoutes() {
           </div>
         </div>
 
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          borderTop: '1px solid rgba(28, 58, 47, 0.08)',
-          paddingTop: '20px'
-        }}>
+        <div className="footer-bottom">
           <div style={{
             fontFamily: 'var(--font-serif)',
             fontSize: '5rem',

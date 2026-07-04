@@ -76,16 +76,15 @@ export default function Shop() {
     setSearchParams({});
   };
 
+  const handleImageError = (e) => {
+    e.target.onerror = null;
+    e.target.src = 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600';
+  };
+
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', padding: '40px 24px' }}>
+    <div className="shop-layout">
       {/* Sidebar Filters */}
-      <aside style={{
-        padding: '24px',
-        backgroundColor: 'var(--color-bg-surface)',
-        borderRadius: 'var(--radius-xl)',
-        boxShadow: 'var(--shadow-low)',
-        height: 'fit-content'
-      }}>
+      <aside className="shop-sidebar">
         <h3 style={{ fontSize: '1.25rem', marginBottom: '20px', fontFamily: 'var(--font-serif)' }}>Filters</h3>
         
         {/* Search */}
@@ -179,7 +178,7 @@ export default function Shop() {
 
       {/* Main Grid View */}
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <div className="catalog-header">
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem' }}>Kitchenware Catalog</h2>
           <div>
             <select
@@ -237,6 +236,7 @@ export default function Shop() {
                       src={prod.images[0]}
                       alt={prod.title}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={handleImageError}
                     />
                   ) : (
                     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)' }}>

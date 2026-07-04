@@ -518,3 +518,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 576px) {
+  .productSlider, .categoryGrid, .gallerySlider {
+    grid-template-columns: 1fr;
+  }
+  .heroSection {
+    margin: 12px;
+    height: 480px;
+  }
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+  .kitchenBannerText {
+    font-size: 1.35rem;
+  }
+  .kitchenBannerOverlay {
+    padding: 32px 24px;
+  }
+  .newsletterLeft h2 {
+    font-size: 2.5rem;
+  }
+  .newsletterRightGrid {
+    display: none;
+  }
+  .sectionPadding {
+    padding: 40px 16px;
+  }
+}

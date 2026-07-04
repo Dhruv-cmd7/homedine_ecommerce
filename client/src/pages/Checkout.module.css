@@ -194,3 +194,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 576px) {
+  .grid2Col {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .cardBlock {
+    padding: 20px;
+  }
+}
