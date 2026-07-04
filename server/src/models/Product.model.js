@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 const ProductSchema = new mongoose.Schema({
+  publicId: {
+    type: String,
+    default: () => crypto.randomUUID(),
+    unique: true,
+    index: true
+  },
   sku: {
     type: String,
     required: [true, 'Product SKU is required'],
@@ -82,14 +89,30 @@ const ProductSchema = new mongoose.Schema({
     title: { type: String },
     description: { type: String },
     keywords: [{ type: String }]
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+    index: true
+  },
+  deletedAt: {
+    type: Date,
+    default: null
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  optimisticConcurrency: true
 });
 
 // Compound indexes for optimized filtering queries
 ProductSchema.index({ category: 1, price: 1, isActive: 1 });
 ProductSchema.index({ brand: 1, price: 1, isActive: 1 });
 ProductSchema.index({ title: 'text', description: 'text' }); // Full Text Search index
+
+// Soft delete query middleware
+ProductSchema.pre(/^find/, function(next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
 
 export default mongoose.model('Product', ProductSchema);

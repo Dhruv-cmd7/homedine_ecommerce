@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 const OrderItemSchema = new mongoose.Schema({
   productId: {
@@ -24,6 +25,12 @@ const OrderItemSchema = new mongoose.Schema({
 }, { _id: false });
 
 const OrderSchema = new mongoose.Schema({
+  publicId: {
+    type: String,
+    default: () => crypto.randomUUID(),
+    unique: true,
+    index: true
+  },
   orderNumber: {
     type: String,
     required: true,
@@ -107,9 +114,25 @@ const OrderSchema = new mongoose.Schema({
   couponUsed: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Coupon'
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+    index: true
+  },
+  deletedAt: {
+    type: Date,
+    default: null
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  optimisticConcurrency: true
+});
+
+// Soft delete query middleware
+OrderSchema.pre(/^find/, function(next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
 });
 
 export default mongoose.model('Order', OrderSchema);

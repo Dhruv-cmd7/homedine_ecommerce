@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 const UserSchema = new mongoose.Schema({
+  publicId: {
+    type: String,
+    default: () => crypto.randomUUID(),
+    unique: true,
+    index: true
+  },
   firstName: {
     type: String,
     required: [true, 'First name is required'],
@@ -57,9 +64,24 @@ const UserSchema = new mongoose.Schema({
     zip: { type: String, required: true },
     country: { type: String, required: true },
     isDefault: { type: Boolean, default: false }
-  }]
+  }],
+  isDeleted: {
+    type: Boolean,
+    default: false,
+    index: true
+  },
+  deletedAt: {
+    type: Date,
+    default: null
+  }
 }, {
   timestamps: true
+});
+
+// Soft delete query middleware
+UserSchema.pre(/^find/, function(next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
 });
 
 export default mongoose.model('User', UserSchema);

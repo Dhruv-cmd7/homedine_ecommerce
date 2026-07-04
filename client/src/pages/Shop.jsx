@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import api from '../services/api';
 import { useCart } from '../context/CartContext';
 import Button from '../components/Button/Button';
@@ -8,6 +9,7 @@ export default function Shop() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
   
   // Filter States
   const [search, setSearch] = useState('');
@@ -15,6 +17,17 @@ export default function Shop() {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [sort, setSort] = useState('newest');
+  const [isBestseller, setIsBestseller] = useState(false);
+
+  // Sync state with URL search parameters
+  useEffect(() => {
+    setSearch(searchParams.get('search') || '');
+    setSelectedCategory(searchParams.get('category') || '');
+    setMinPrice(searchParams.get('minPrice') || '');
+    setMaxPrice(searchParams.get('maxPrice') || '');
+    setSort(searchParams.get('sort') || 'newest');
+    setIsBestseller(searchParams.get('isBestseller') === 'true');
+  }, [searchParams]);
 
   const fetchFilters = async () => {
     try {
@@ -33,6 +46,7 @@ export default function Shop() {
       if (selectedCategory) params.category = selectedCategory;
       if (minPrice) params.minPrice = minPrice;
       if (maxPrice) params.maxPrice = maxPrice;
+      if (isBestseller) params.isBestseller = true;
       params.sort = sort;
 
       const res = await api.get('/catalog/products', { params });
@@ -50,7 +64,7 @@ export default function Shop() {
 
   useEffect(() => {
     fetchProducts();
-  }, [search, selectedCategory, minPrice, maxPrice, sort]);
+  }, [search, selectedCategory, minPrice, maxPrice, sort, isBestseller]);
 
   const clearFilters = () => {
     setSearch('');
@@ -58,6 +72,8 @@ export default function Shop() {
     setMinPrice('');
     setMaxPrice('');
     setSort('newest');
+    setIsBestseller(false);
+    setSearchParams({});
   };
 
   return (

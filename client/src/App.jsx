@@ -48,8 +48,7 @@ function Navigation({ onOpenCart }) {
         </div>
         <nav style={{ display: 'flex', gap: '32px' }}>
           <Link to="/shop" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontSize: '0.9375rem' }}>Shop</Link>
-          <Link to="/shop?sort=rating" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontSize: '0.9375rem' }}>Bestsellers</Link>
-          <Link to="/shop?isFeatured=true" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontSize: '0.9375rem' }}>Gallery</Link>
+          <Link to="/shop?isBestseller=true" style={{ color: 'var(--color-text-main)', textDecoration: 'none', fontSize: '0.9375rem' }}>Bestsellers</Link>
         </nav>
       </div>
 
