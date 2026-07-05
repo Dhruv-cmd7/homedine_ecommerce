@@ -13,13 +13,23 @@ const app = express();
 app.use(helmet());
 
 // Configure CORS to whitelist local client and production domain
-const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS
+  ? process.env.CORS_ALLOWED_ORIGINS.split(',')
+  : ['http://localhost:3000', 'http://127.0.0.1:3000'];
+
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    
+    // Check if the incoming request origin is allowed
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      const trimmed = allowedOrigin.trim();
+      return trimmed === '*' || trimmed === origin;
+    });
+
+    if (!isAllowed) {
+      const msg = `The CORS policy for this site does not allow access from origin: ${origin}`;
       return callback(new Error(msg), false);
     }
     return callback(null, true);
