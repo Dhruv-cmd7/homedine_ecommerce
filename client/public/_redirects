@@ -1,2 +1,2 @@
-/api/*  404
+/api/*  https://homedine.onrender.com/api/:splat  200
 /*      /index.html  200

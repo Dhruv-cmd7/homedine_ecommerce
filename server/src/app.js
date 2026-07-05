@@ -15,7 +15,7 @@ app.use(helmet());
 // Configure CORS to whitelist local client and production domain
 const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS
   ? process.env.CORS_ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:3000', 'http://127.0.0.1:3000'];
+  : ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://homedineecommerce.netlify.app'];
 
 app.use(cors({
   origin: (origin, callback) => {
