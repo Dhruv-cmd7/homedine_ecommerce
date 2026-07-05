@@ -77,3 +77,33 @@
   margin-top: 4px;
   padding-left: 4px;
 }
+
+.passwordField {
+  padding-right: 48px;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: color var(--transition-smooth);
+  outline: none;
+}
+
+.toggleButton:hover {
+  color: var(--color-primary-800);
+}
+
+.eyeIcon {
+  width: 20px;
+  height: 20px;
+}
