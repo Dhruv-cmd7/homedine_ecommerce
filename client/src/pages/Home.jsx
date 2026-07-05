@@ -17,9 +17,10 @@ export default function Home() {
     const fetchBestsellers = async () => {
       try {
         const res = await api.get('/catalog/products', { params: { isBestseller: true, limit: 4 } });
-        setBestsellers(res.data.data.products || []);
+        setBestsellers(res.data?.data?.products || []);
       } catch (err) {
         console.error('Error fetching bestsellers:', err.message);
+        setBestsellers([]);
       }
     };
     fetchBestsellers();

@@ -32,9 +32,10 @@ export default function Shop() {
   const fetchFilters = async () => {
     try {
       const res = await api.get('/catalog/categories');
-      setCategories(res.data.data);
+      setCategories(res.data?.data || []);
     } catch (err) {
       console.error('Failed to fetch categories:', err.message);
+      setCategories([]);
     }
   };
 
@@ -50,9 +51,10 @@ export default function Shop() {
       params.sort = sort;
 
       const res = await api.get('/catalog/products', { params });
-      setProducts(res.data.data.products || []);
+      setProducts(res.data?.data?.products || []);
     } catch (err) {
       console.error('Failed to fetch products:', err.message);
+      setProducts([]);
     } finally {
       setLoading(false);
     }
